@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservas — Restaurante Nobre | Lichinga</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .reservas-hero-bg {
+      background-image: url('https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=1800&q=80');
+    }
+
+    .reservas-main {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      min-height: 80vh;
+    }
+
+    .reservas-info {
+      background: var(--creme);
+      padding: 7rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .info-bloco {
+      margin-bottom: 3.5rem;
+    }
+
+    .info-bloco h3 {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      margin-bottom: 1.2rem;
+    }
+
+    .info-bloco p {
+      font-size: 1rem;
+      color: var(--cinza-escuro);
+      line-height: 2;
+    }
+
+    .info-bloco a {
+      color: var(--preto);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .info-bloco a:hover { color: var(--ouro); }
+
+    .horario-lista { list-style: none; }
+
+    .horario-lista li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      color: var(--cinza-escuro);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--bege);
+    }
+
+    .horario-lista li span:last-child { color: var(--preto); }
+
+    .reservas-form-area {
+      background: var(--off-white);
+      padding: 7rem 5rem;
+      position: relative;
+    }
+
+    .form-titulo {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 400;
+      color: var(--preto);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-titulo em { font-style: italic; color: var(--ouro); }
+
+    .form-subtitulo {
+      font-size: 0.95rem;
+      color: var(--cinza-escuro);
+      margin-bottom: 3rem;
+    }
+
+    .form-reserva {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .form-grupo {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .form-grupo.full { grid-column: 1 / -1; }
+
+    .form-grupo label {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cinza-escuro);
+    }
+
+    .form-grupo input,
+    .form-grupo select,
+    .form-grupo textarea {
+      background: var(--branco);
+      border: 1px solid var(--bege);
+      color: var(--preto);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      padding: 1rem 1.2rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      width: 100%;
+      border-radius: 0;
+      appearance: none;
+    }
+
+    .form-grupo input:focus,
+    .form-grupo select:focus,
+    .form-grupo textarea:focus {
+      border-color: var(--ouro);
+      box-shadow: 0 0 0 2px rgba(198,164,59,0.1);
+    }
+
+    .form-grupo input::placeholder,
+    .form-grupo textarea::placeholder {
+      color: var(--cinza-medio);
+    }
+
+    .form-grupo select option {
+      background: var(--branco);
+      color: var(--preto);
+    }
+
+    .form-grupo textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .pessoas-input {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--bege);
+      overflow: hidden;
+    }
+
+    .pessoas-input button {
+      background: var(--bege-claro);
+      border: none;
+      color: var(--preto);
+      font-size: 1.2rem;
+      width: 48px; height: 50px;
+      cursor: pointer;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+
+    .pessoas-input button:hover { background: var(--bege); }
+
+    .pessoas-num {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--preto);
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      grid-column: 1 / -1;
+    }
+
+    .form-check input[type="checkbox"] {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      accent-color: var(--ouro);
+      margin-top: 2px;
+    }
+
+    .form-check label {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--cinza-escuro);
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
+    .form-check label a { color: var(--ouro); text-decoration: none; }
+
+    .btn-enviar {
+      grid-column: 1 / -1;
+      background: var(--ouro);
+      color: var(--branco);
+      border: none;
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 1.2rem 3rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    .btn-enviar:hover { background: var(--ouro-claro); transform: translateY(-2px); }
+    .btn-enviar:active { transform: translateY(0); }
+
+    .form-grupo input.erro,
+    .form-grupo select.erro {
+      border-color: #c0392b;
+    }
+
+    .form-grupo .msg-erro {
+      font-family: var(--font-ui);
+      font-size: 0.6rem;
+      color: #c0392b;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .confirmacao {
+      display: none;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .confirmacao.visivel { display: block; }
+
+    .confirmacao-icone {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .confirmacao h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--preto);
+      margin-bottom: 1rem;
+    }
+
+    .confirmacao h3 em { font-style: italic; color: var(--ouro); }
+
+    .confirmacao p {
+      color: var(--cinza-escuro);
+      max-width: 400px;
+      margin: 0 auto 2rem;
+      line-height: 1.9;
+    }
+
+    .confirmacao-detalhe {
+      background: var(--branco);
+      border: 1px solid var(--bege);
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 400px;
+      text-align: left;
+    }
+
+    .det-linha {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--bege);
+      color: var(--cinza-escuro);
+    }
+    .det-linha span:last-child { color: var(--preto); font-weight: 500; }
+
+    @media (max-width: 1024px) {
+      .reservas-main { grid-template-columns: 1fr; }
+      .reservas-info { padding: 4rem 1.5rem; }
+      .reservas-form-area { padding: 4rem 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .form-reserva { grid-template-columns: 1fr; }
+      .form-grupo.full { grid-column: 1; }
+      .btn-enviar { grid-column: 1; }
+      .form-check { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Nobre<span>Restaurante &amp; Adega</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html">Sobre</a></li>
+    <li><a href="ementa.html">Ementa</a></li>
+    <li><a href="galeria.html">Galeria</a></li>
+    <li><a href="reservas.html" class="nav-reserva active">Reservar Mesa</a></li>
+  </ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg reservas-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Reserve a Sua Mesa</p>
+    <h1>Uma <em>experiência</em><br>inesquecível</h1>
+  </div>
+</section>
+
+<div class="reservas-main">
+  <!-- INFO LATERAL - MOÇAMBIQUE -->
+  <aside class="reservas-info">
+    <div class="info-bloco reveal">
+      <h3>Horários</h3>
+      <ul class="horario-lista">
+        <li><span>Segunda-Feira</span><span>Encerrado</span></li>
+        <li><span>Terça a Sexta</span><span>12h – 15h30 · 19h – 23h</span></li>
+        <li><span>Sábado</span><span>12h – 23h30</span></li>
+        <li><span>Domingo</span><span>12h – 22h30</span></li>
+      </ul>
+    </div>
+
+    <div class="info-bloco reveal">
+      <h3>Contacto</h3>
+      <p>
+        <a href="tel:+258821234567">(+258) 82 123 4567</a><br>
+        <a href="mailto:reservas@restaurantenobre.mz">reservas@restaurantenobre.mz</a>
+      </p>
+    </div>
+
+    <div class="info-bloco reveal">
+      <h3>Morada</h3>
+      <p>Avenida da Independência, 124<br>Lichinga, Niassa<br>Moçambique<br><br>Próximo ao Mercado Central</p>
+    </div>
+
+    <div class="info-bloco reveal">
+      <h3>Política de Reserva</h3>
+      <p>Reservas aceites até 4h antes da refeição. Para grupos de 10+ pessoas contacte-nos por telefone ou e-mail. Aceitamos pagamentos em dinheiro (MTn) e transferência M-Pesa.</p>
+    </div>
+  </aside>
+
+  <!-- FORMULÁRIO -->
+  <main class="reservas-form-area">
+    <div id="formArea">
+      <p class="form-titulo reveal">Faça a sua <em>reserva</em></p>
+      <p class="form-subtitulo reveal">Preencha os campos abaixo e nós confirmaremos brevemente.</p>
+
+      <form class="form-reserva reveal" id="formReserva" novalidate>
+        <!-- NOME -->
+        <div class="form-grupo">
+          <label for="nome">Nome Completo *</label>
+          <input type="text" id="nome" name="nome" placeholder="Maria Muchanga" />
+          <span class="msg-erro" id="erroNome"></span>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-grupo">
+          <label for="email">E-mail *</label>
+          <input type="email" id="email" name="email" placeholder="maria@exemplo.com" />
+          <span class="msg-erro" id="erroEmail"></span>
+        </div>
+
+        <!-- TELEFONE -->
+        <div class="form-grupo">
+          <label for="telefone">Telefone *</label>
+          <input type="tel" id="telefone" name="telefone" placeholder="+258 82 123 4567" />
+          <span class="msg-erro" id="erroTelefone"></span>
+        </div>
+
+        <!-- DATA -->
+        <div class="form-grupo">
+          <label for="data">Data *</label>
+          <input type="date" id="data" name="data" />
+          <span class="msg-erro" id="erroData"></span>
+        </div>
+
+        <!-- HORA -->
+        <div class="form-grupo">
+          <label for="hora">Hora *</label>
+          <select id="hora" name="hora">
+            <option value="">Seleccionar horário</option>
+            <optgroup label="Almoço">
+              <option>12:00</option>
+              <option>12:30</option>
+              <option>13:00</option>
+              <option>13:30</option>
+              <option>14:00</option>
+              <option>14:30</option>
+              <option>15:00</option>
+            </optgroup>
+            <optgroup label="Jantar">
+              <option>19:00</option>
+              <option>19:30</option>
+              <option>20:00</option>
+              <option>20:30</option>
+              <option>21:00</option>
+              <option>21:30</option>
+              <option>22:00</option>
+              <option>22:30</option>
+            </optgroup>
+          </select>
+          <span class="msg-erro" id="erroHora"></span>
+        </div>
+
+        <!-- PESSOAS -->
+        <div class="form-grupo">
+          <label>Número de Pessoas *</label>
+          <div class="pessoas-input">
+            <button type="button" id="btnMenos">−</button>
+            <span class="pessoas-num" id="pessoasNum">2</span>
+            <input type="hidden" id="pessoas" name="pessoas" value="2" />
+            <button type="button" id="btnMais">+</button>
+          </div>
+        </div>
+
+        <!-- OCASIÃO -->
+        <div class="form-grupo">
+          <label for="ocasiao">Ocasião Especial</label>
+          <select id="ocasiao" name="ocasiao">
+            <option value="">Nenhuma em especial</option>
+            <option>Aniversário</option>
+            <option>Aniversário de Casamento</option>
+            <option>Reunião de Negócios</option>
+            <option>Encontro Romântico</option>
+            <option>Celebração em Família</option>
+            <option>Fim de Semana</option>
+            <option>Outra</option>
+          </select>
+        </div>
+
+        <!-- OBSERVAÇÕES -->
+        <div class="form-grupo full">
+          <label for="obs">Observações / Alergias</label>
+          <textarea id="obs" name="obs" placeholder="Ex: alergia a camarão, cadeira de bebé, mesa perto da janela…"></textarea>
+        </div>
+
+        <!-- CONSENTIMENTO -->
+        <div class="form-check">
+          <input type="checkbox" id="consentimento" name="consentimento" />
+          <label for="consentimento">
+            Concordo com a <a href="#">Política de Privacidade</a> e autorizo o Restaurante Nobre a contactar-me para confirmar a reserva. *
+          </label>
+        </div>
+        <span class="msg-erro" id="erroConsentimento" style="grid-column:1/-1;"></span>
+
+        <!-- ENVIAR -->
+        <button type="submit" class="btn-enviar">
+          <span>Confirmar Reserva</span>
+          <span>→</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- CONFIRMAÇÃO -->
+    <div class="confirmacao" id="confirmacao">
+      <div class="confirmacao-icone">✦</div>
+      <h3>Reserva <em>confirmada!</em></h3>
+      <p>Obrigado, <strong id="confNome"></strong>. A sua reserva foi recebida com sucesso. Enviaremos uma confirmação para o seu e-mail em breve.</p>
+      <div class="confirmacao-detalhe">
+        <div class="det-linha"><span>Data</span><span id="confData"></span></div>
+        <div class="det-linha"><span>Hora</span><span id="confHora"></span></div>
+        <div class="det-linha"><span>Pessoas</span><span id="confPessoas"></span></div>
+        <div class="det-linha"><span>Ocasião</span><span id="confOcasiao">—</span></div>
+      </div>
+      <a href="index.html" class="btn btn-outline" style="margin-top:1rem;">Voltar ao Início</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Nobre</span>
+      <p>Cozinha moçambicana contemporânea, no coração de Lichinga. Os melhores sabores do Niassa à sua mesa.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="ementa.html">Ementa</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="reservas.html">Reservas</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Horários</h4>
+      <p>Terça – Domingo<br>12h00 – 15h30<br>19h00 – 23h00<br><br>Segunda-Feira<br>Encerrado</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contactos</h4>
+      <p>Avenida da Independência, 124<br>Lichinga, Niassa<br>Moçambique<br><br>(+258) 82 123 4567</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Restaurante Nobre. Todos os direitos reservados.</p>
+    <p>Orgulhosamente em Lichinga ♥</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  let numPessoas = 2;
+  const pessoasNum = document.getElementById('pessoasNum');
+  const pessoasInput = document.getElementById('pessoas');
+
+  document.getElementById('btnMenos').addEventListener('click', () => {
+    if (numPessoas > 1) { numPessoas--; pessoasNum.textContent = numPessoas; pessoasInput.value = numPessoas; }
+  });
+  document.getElementById('btnMais').addEventListener('click', () => {
+    if (numPessoas < 20) { numPessoas++; pessoasNum.textContent = numPessoas; pessoasInput.value = numPessoas; }
+  });
+
+  const dataInput = document.getElementById('data');
+  const hoje = new Date().toISOString().split('T')[0];
+  dataInput.min = hoje;
+
+  const form = document.getElementById('formReserva');
+
+  function limparErros() {
+    document.querySelectorAll('.msg-erro').forEach(e => e.textContent = '');
+    document.querySelectorAll('.erro').forEach(e => e.classList.remove('erro'));
+  }
+
+  function mostrarErro(campo, msg) {
+    const input = document.getElementById(campo);
+    const erro = document.getElementById('erro' + campo.charAt(0).toUpperCase() + campo.slice(1));
+    if (input) input.classList.add('erro');
+    if (erro) erro.textContent = msg;
+    return false;
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    limparErros();
+    let valido = true;
+
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const data = document.getElementById('data').value;
+    const hora = document.getElementById('hora').value;
+    const consentimento = document.getElementById('consentimento').checked;
+
+    if (!nome) valido = mostrarErro('nome', 'O nome é obrigatório');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) valido = mostrarErro('email', 'Insira um e-mail válido');
+    if (!telefone) valido = mostrarErro('telefone', 'O telefone é obrigatório');
+    if (!data) valido = mostrarErro('data', 'Seleccione uma data');
+    if (!hora) valido = mostrarErro('hora', 'Seleccione um horário');
+    if (!consentimento) {
+      document.getElementById('erroConsentimento').textContent = 'É necessário aceitar os termos';
+      valido = false;
+    }
+
+    if (!valido) return;
+
+    const ocasiao = document.getElementById('ocasiao').value || '—';
+    const dataFmt = new Date(data + 'T12:00:00').toLocaleDateString('pt-PT', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+    document.getElementById('confNome').textContent = nome.split(' ')[0];
+    document.getElementById('confData').textContent = dataFmt;
+    document.getElementById('confHora').textContent = hora + 'h';
+    document.getElementById('confPessoas').textContent = numPessoas + (numPessoas === 1 ? ' pessoa' : ' pessoas');
+    document.getElementById('confOcasiao').textContent = ocasiao;
+
+    document.getElementById('formArea').style.display = 'none';
+    const conf = document.getElementById('confirmacao');
+    conf.style.display = 'block';
+    conf.classList.add('visivel');
+    conf.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+</body>
+</html>

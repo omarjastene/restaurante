@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeria — Restaurante Nobre | Lichinga</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .galeria-hero-bg {
+      background-image: url('https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=1800&q=80');
+    }
+
+    .galeria-main { background: var(--off-white); padding: 6rem 4rem; }
+
+    .galeria-filtros {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+
+    .gal-btn {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      background: transparent;
+      color: var(--cinza-escuro);
+      border: 1px solid var(--bege);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .gal-btn:hover, .gal-btn.activo {
+      background: var(--ouro);
+      color: var(--branco);
+      border-color: var(--ouro);
+    }
+
+    .gal-grid {
+      columns: 3;
+      column-gap: 4px;
+    }
+
+    .gal-item {
+      break-inside: avoid;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+
+    .gal-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .gal-item:hover img { transform: scale(1.06); }
+
+    .gal-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      transition: background 0.4s;
+    }
+
+    .gal-item:hover .gal-item-overlay {
+      background: rgba(0,0,0,0.55);
+    }
+
+    .gal-item-label {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--branco);
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
+    .gal-item:hover .gal-item-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gal-item.oculto { display: none; }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .lightbox.aberto {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+    }
+
+    .lightbox-fechar {
+      position: absolute;
+      top: 2rem; right: 2rem;
+      background: none;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--ouro);
+      font-size: 1.5rem;
+      width: 50px; height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .lightbox-fechar:hover { background: var(--ouro); color: var(--preto); }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--ouro);
+      font-size: 1.5rem;
+      width: 50px; height: 80px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .lightbox-nav:hover { background: rgba(201,168,76,0.2); }
+    .lightbox-prev { left: 2rem; }
+    .lightbox-next { right: 2rem; }
+
+    @media (max-width: 768px) {
+      .gal-grid { columns: 2; }
+      .galeria-main { padding: 4rem 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .gal-grid { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Nobre<span>Restaurante &amp; Adega</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html">Sobre</a></li>
+    <li><a href="ementa.html">Ementa</a></li>
+    <li><a href="galeria.html" class="active">Galeria</a></li>
+    <li><a href="reservas.html" class="nav-reserva">Reservar Mesa</a></li>
+  </ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg galeria-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Memórias &amp; Sabores</p>
+    <h1>A nossa <em>Galeria</em></h1>
+  </div>
+</section>
+
+<section class="galeria-main">
+  <div class="galeria-filtros reveal">
+    <button class="gal-btn activo" data-gal="todos">Todos</button>
+    <button class="gal-btn" data-gal="pratos">Pratos</button>
+    <button class="gal-btn" data-gal="espaco">Espaço</button>
+    <button class="gal-btn" data-gal="equipa">Equipa</button>
+  </div>
+
+  <div class="gal-grid reveal">
+    <div class="gal-item" data-cat="pratos" data-label="Frango à Zambeziana">
+      <img src="https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&q=80" alt="Frango à Zambeziana - Frango grelhado com molho de coco e amendoim" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Frango à Zambeziana</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="espaco" data-label="Sala Principal do Restaurante">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Sala principal do Restaurante Nobre em Lichinga" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Sala Principal</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="pratos" data-label="Arroz de Marisco à Moda de Moçambique">
+      <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Arroz de marisco moçambicano com camarão e lula" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Arroz de Marisco</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="equipa" data-label="Chef Carlos Muchanga">
+      <img src="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=600&q=80" alt="Chef Carlos Muchanga na cozinha do Nobre" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Chef Carlos Muchanga</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="pratos" data-label="Cabrito Assado do Niassa">
+      <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&q=80" alt="Cabrito assado especialidade do Niassa" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Cabrito Assado do Niassa</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="espaco" data-label="Adega com Vinhos Sul-Africanos">
+      <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=80" alt="Adega do Restaurante Nobre" />
+      <div class="gal-item-overlay"><span class="gal-item-label">A Nossa Adega</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="pratos" data-label="Doce de Coco Moçambicano">
+      <img src="https://images.unsplash.com/photo-1484723091739-30990b39e4ff?w=600&q=80" alt="Doce de coco tradicional moçambicano" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Doce de Coco</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="espaco" data-label="Mesa Posta - Experiência Nobre">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Mesa elegantemente preparada no Restaurante Nobre" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Mesa Posta</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="equipa" data-label="Equipa do Restaurante Nobre">
+      <img src="https://images.unsplash.com/photo-1583394293214-0ac50aba783e?w=600&q=80" alt="Equipa de cozinha e sala do Restaurante Nobre" />
+      <div class="gal-item-overlay"><span class="gal-item-label">A Nossa Equipa</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="pratos" data-label="Camarão Grelhado com Molho de Coco">
+      <img src="https://images.unsplash.com/photo-1606756790138-261d2b21cd75?w=600&q=80" alt="Camarão grelhado especialidade da casa" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Camarão Grelhado</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="espaco" data-label="Esplanada com Vista para Lichinga">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" alt="Esplanada do Restaurante Nobre" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Esplanada</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="pratos" data-label="Mousse de Chocolate com Coco">
+      <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&q=80" alt="Mousse de chocolate com leite de coco" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Mousse de Chocolate</span></div>
+    </div>
+
+    <div class="gal-item" data-cat="pratos" data-label="Peixe do Lago Niassa Grelhado">
+      <img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?w=600&q=80" alt="Peixe fresco do Lago Niassa grelhado" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Peixe do Lago Niassa</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="pratos" data-label="Matapa Tradicional">
+      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Matapa - folhas de mandioca com amendoim e camarão" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Matapa Tradicional</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="espaco" data-label="Bar do Restaurante">
+      <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" alt="Bar acolhedor do Restaurante Nobre" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Bar</span></div>
+    </div>
+    
+    <div class="gal-item" data-cat="equipa" data-label="Sommelier António Nobre">
+      <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=600&q=80" alt="Sommelier António Nobre na adega" />
+      <div class="gal-item-overlay"><span class="gal-item-label">Sommelier António Nobre</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-fechar" id="lbFechar">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lbPrev">‹</button>
+  <img src="" alt="" id="lbImg" />
+  <button class="lightbox-nav lightbox-next" id="lbNext">›</button>
+  <p class="lightbox-caption" id="lbCaption"></p>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Nobre</span>
+      <p>Cozinha moçambicana contemporânea, no coração de Lichinga. Os melhores sabores do Niassa à sua mesa.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="ementa.html">Ementa</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="reservas.html">Reservas</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Horários</h4>
+      <p>Terça – Domingo<br>12h00 – 15h30<br>19h00 – 23h00<br><br>Segunda-Feira<br>Encerrado</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contactos</h4>
+      <p>Avenida da Independência, 124<br>Lichinga, Niassa<br>Moçambique<br><br>(+258) 82 123 4567</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Restaurante Nobre. Todos os direitos reservados.</p>
+    <p>Orgulhosamente em Lichinga ♥</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  const galBtns = document.querySelectorAll('.gal-btn');
+  const galItems = document.querySelectorAll('.gal-item');
+
+  galBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      galBtns.forEach(b => b.classList.remove('activo'));
+      btn.classList.add('activo');
+      const cat = btn.dataset.gal;
+      galItems.forEach(item => {
+        if (cat === 'todos' || item.dataset.cat === cat) {
+          item.classList.remove('oculto');
+        } else {
+          item.classList.add('oculto');
+        }
+      });
+    });
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCaption = document.getElementById('lbCaption');
+  let currentIndex = 0;
+  let visibleItems = [];
+
+  function openLightbox(index) {
+    visibleItems = [...galItems].filter(i => !i.classList.contains('oculto'));
+    currentIndex = index;
+    const item = visibleItems[currentIndex];
+    lbImg.src = item.querySelector('img').src;
+    lbCaption.textContent = item.dataset.label;
+    lightbox.classList.add('aberto');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('aberto');
+    document.body.style.overflow = '';
+  }
+
+  galItems.forEach((item, i) => {
+    item.addEventListener('click', () => {
+      const visible = [...galItems].filter(gi => !gi.classList.contains('oculto'));
+      const idx = visible.indexOf(item);
+      openLightbox(idx);
+    });
+  });
+
+  document.getElementById('lbFechar').addEventListener('click', closeLightbox);
+
+  document.getElementById('lbPrev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+    lbImg.src = visibleItems[currentIndex].querySelector('img').src;
+    lbCaption.textContent = visibleItems[currentIndex].dataset.label;
+  });
+
+  document.getElementById('lbNext').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % visibleItems.length;
+    lbImg.src = visibleItems[currentIndex].querySelector('img').src;
+    lbCaption.textContent = visibleItems[currentIndex].dataset.label;
+  });
+
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('aberto')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+    if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+  });
+</script>
+</body>
+</html>

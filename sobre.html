@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre Nós — Restaurante Nobre | Lichinga</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .sobre-hero-bg {
+      background-image: url('https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=1800&q=80');
+    }
+
+    .historia { 
+      background: var(--creme); 
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 4rem auto 0;
+      padding-left: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--ouro), var(--ouro-suave));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 4rem 3rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -5px; top: 6px;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--ouro);
+      border: 2px solid var(--creme);
+      box-shadow: 0 0 0 3px rgba(198,164,59,0.2);
+    }
+
+    .timeline-ano {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--ouro-suave);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--preto);
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-item p {
+      font-size: 1rem;
+      color: var(--cinza-escuro);
+      max-width: 600px;
+    }
+
+    .equipa { 
+      background: var(--off-white); 
+    }
+
+    .equipa-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .equipa-card { text-align: center; }
+
+    .equipa-foto {
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.5rem;
+      border: 3px solid var(--bege);
+      display: block;
+      transition: border-color 0.3s, transform 0.4s;
+    }
+
+    .equipa-card:hover .equipa-foto {
+      border-color: var(--ouro);
+      transform: scale(1.03);
+    }
+
+    .equipa-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--preto);
+      margin-bottom: 0.3rem;
+    }
+
+    .equipa-cargo {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ouro);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .equipa-card p {
+      font-size: 0.95rem;
+      color: var(--cinza-escuro);
+      line-height: 1.8;
+    }
+
+    .valores { 
+      background: var(--creme); 
+    }
+
+    .valores-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .valor-card {
+      padding: 3rem;
+      background: var(--branco);
+      border: 1px solid var(--bege);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .valor-card:hover { 
+      border-color: var(--ouro);
+      transform: translateY(-5px);
+    }
+
+    .valor-num {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--ouro-suave);
+      position: absolute;
+      top: 0.5rem; right: 1.5rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .valor-icone {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .valor-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--preto);
+      margin-bottom: 0.8rem;
+    }
+
+    .valor-card p {
+      font-size: 0.95rem;
+      color: var(--cinza-escuro);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .equipa-grid { grid-template-columns: 1fr; }
+      .valores-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Nobre<span>Restaurante &amp; Adega</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html" class="active">Sobre</a></li>
+    <li><a href="ementa.html">Ementa</a></li>
+    <li><a href="galeria.html">Galeria</a></li>
+    <li><a href="reservas.html" class="nav-reserva">Reservar Mesa</a></li>
+  </ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg sobre-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">A Nossa Identidade</p>
+    <h1>Sobre o <em>Nobre</em></h1>
+  </div>
+</section>
+
+<!-- HISTÓRIA TIMELINE - MOÇAMBIQUE -->
+<section class="historia secao">
+  <div class="secao-topo">
+    <span class="secao-eyebrow reveal">A Nossa Jornada</span>
+    <h2 class="reveal">10 anos de <em>história</em> e sabor</h2>
+    <p class="reveal">De um pequeno espaço a um restaurante reconhecido em Lichinga, a nossa história é feita de dedicação, paixão e muito amor pela cozinha moçambicana.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-ano">2015</div>
+      <h3>O Início</h3>
+      <p>António Nobre abre as portas do seu primeiro restaurante na Avenida da Independência, com apenas 8 mesas e um menu de 6 pratos tradicionais.</p>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-ano">2018</div>
+      <h3>Primeira Expansão</h3>
+      <p>O espaço duplica. A adega entra em funcionamento com uma curadoria de vinhos sul-africanos e portugueses, hoje com mais de 80 rótulos.</p>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-ano">2021</div>
+      <h3>Reconhecimento Regional</h3>
+      <p>O Restaurante Nobre é reconhecido como um dos melhores do Niassa, recebendo clientes de toda a província e regiões vizinhas.</p>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-ano">2023</div>
+      <h3>Chef Carlos Muchanga</h3>
+      <p>O talentoso chef local, formado em Maputo, assume a cozinha e traz um sopro de contemporaneidade mantendo as raízes moçambicanas.</p>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-ano">2024</div>
+      <h3>Hoje</h3>
+      <p>Mais de 5.000 clientes por ano, uma equipa de 12 pessoas e o mesmo amor com que tudo começou.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPA - MOÇAMBIQUE -->
+<section class="equipa secao">
+  <div class="secao-topo">
+    <span class="secao-eyebrow reveal">As Pessoas por Detrás da Magia</span>
+    <h2 class="reveal">A nossa <em>equipa</em></h2>
+  </div>
+  <div class="equipa-grid">
+    <div class="equipa-card reveal">
+      <img src="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=400&q=80" alt="Chef Carlos Muchanga" class="equipa-foto" />
+      <h3>Carlos Muchanga</h3>
+      <span class="equipa-cargo">Chef Executivo</span>
+      <p>Formado na Escola de Hotelaria e Turismo de Maputo, traz técnica e paixão à cozinha tradicional moçambicana do Nobre.</p>
+    </div>
+    <div class="equipa-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1583394293214-0ac50aba783e?w=400&q=80" alt="António Nobre" class="equipa-foto" />
+      <h3>António Nobre</h3>
+      <span class="equipa-cargo">Fundador &amp; Gestor</span>
+      <p>10 anos a construir o melhor restaurante de Lichinga. A sua paixão pela gastronomia moçambicana é contagiante.</p>
+    </div>
+    <div class="equipa-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&q=80" alt="Isabel Nunes" class="equipa-foto" />
+      <h3>Isabel Nunes</h3>
+      <span class="equipa-cargo">Chefe de Sala</span>
+      <p>8 anos de experiência em restauração. O atendimento caloroso e profissional é a sua marca registada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALORES - MOÇAMBIQUE -->
+<section class="valores secao">
+  <div class="secao-topo">
+    <span class="secao-eyebrow reveal">Aquilo em Que Acreditamos</span>
+    <h2 class="reveal">Os nossos <em>valores</em></h2>
+  </div>
+  <div class="valores-grid">
+    <div class="valor-card reveal">
+      <span class="valor-num">01</span>
+      <span class="valor-icone"></span>
+      <h3>Produtos Locais</h3>
+      <p>Trabalhamos com produtores do Niassa e regiões vizinhas, respeitando a sazonalidade e privilegiando ingredientes frescos e sustentáveis da nossa terra.</p>
+    </div>
+    <div class="valor-card reveal reveal-delay-1">
+      <span class="valor-num">02</span>
+      <span class="valor-icone"></span>
+      <h3>Tradição com Alma</h3>
+      <p>Respeitamos as receitas tradicionais moçambicanas mas não temos medo de as reinterpretar com criatividade e técnica contemporânea.</p>
+    </div>
+    <div class="valor-card reveal reveal-delay-2">
+      <span class="valor-num">03</span>
+      <span class="valor-icone"></span>
+      <h3>Hospitalidade Genuína</h3>
+      <p>Cada cliente é recebido como visita em casa. O calor humano e a alegria moçambicana são tão importantes para nós quanto a qualidade da comida.</p>
+    </div>
+    <div class="valor-card reveal reveal-delay-3">
+      <span class="valor-num">04</span>
+      <span class="valor-icone"></span>
+      <h3>Responsabilidade</h3>
+      <p>Reduzimos o desperdício alimentar, usamos produtos reutilizáveis e apoiamos práticas de agricultura sustentável na região do Niassa.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Nobre</span>
+      <p>Cozinha moçambicana contemporânea, no coração de Lichinga. Uma experiência que celebra os sabores e a cultura da nossa terra.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="ementa.html">Ementa</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="reservas.html">Reservas</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Horários</h4>
+      <p>Terça – Domingo<br>12h00 – 15h30<br>19h00 – 23h00<br><br>Segunda-Feira<br>Encerrado</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contactos</h4>
+      <p>Avenida da Independência, 124<br>Lichinga, Niassa<br>Moçambique<br><br>(+258) 82 123 4567<br>reservas@restaurantenobre.mz</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Restaurante Nobre. Todos os direitos reservados.</p>
+    <p>Orgulhosamente em Lichinga ♥</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

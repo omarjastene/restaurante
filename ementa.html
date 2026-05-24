@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ementa — Restaurante Nobre | Lichinga</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .ementa-hero-bg {
+      background-image: url('https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=1800&q=80');
+    }
+
+    .ementa-main { background: var(--off-white); padding: 6rem 4rem; }
+
+    .ementa-filtros {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 5rem;
+      border-bottom: 1px solid var(--bege);
+      padding-bottom: 2rem;
+    }
+
+    .filtro-btn {
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.6rem;
+      background: transparent;
+      color: var(--cinza-escuro);
+      border: 1px solid var(--bege);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filtro-btn:hover,
+    .filtro-btn.activo {
+      background: var(--ouro);
+      color: var(--branco);
+      border-color: var(--ouro);
+    }
+
+    .categoria-titulo {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: var(--preto);
+      margin-bottom: 0.5rem;
+    }
+
+    .categoria-titulo em { font-style: italic; color: var(--ouro); }
+
+    .categoria-desc {
+      font-size: 0.95rem;
+      color: var(--cinza-escuro);
+      margin-bottom: 3rem;
+      max-width: 500px;
+    }
+
+    .prato-list { list-style: none; }
+
+    .prato-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--bege);
+      transition: border-color 0.3s;
+    }
+
+    .prato-item:hover {
+      border-bottom-color: var(--ouro);
+    }
+
+    .prato-info { display: flex; gap: 1.5rem; align-items: flex-start; }
+
+    .prato-img {
+      width: 90px; height: 90px;
+      object-fit: cover;
+      flex-shrink: 0;
+      opacity: 0.85;
+      transition: opacity 0.3s;
+      border-radius: 4px;
+    }
+
+    .prato-item:hover .prato-img { opacity: 1; }
+
+    .prato-nome {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--preto);
+      margin-bottom: 0.3rem;
+    }
+
+    .prato-descricao {
+      font-size: 0.9rem;
+      color: var(--cinza-escuro);
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+
+    .prato-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+    .prato-tag {
+      font-family: var(--font-ui);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid var(--bege);
+      color: var(--cinza-medio);
+    }
+
+    .prato-preco {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--ouro);
+      white-space: nowrap;
+      padding-top: 1rem;
+    }
+
+    .ementa-secao {
+      margin-bottom: 6rem;
+    }
+
+    .ementa-secao.oculto { display: none; }
+
+    .ementa-nota {
+      background: var(--creme);
+      padding: 3rem 4rem;
+      display: flex;
+      gap: 4rem;
+      align-items: start;
+      border-top: 1px solid var(--bege);
+    }
+
+    .nota-icones { display: flex; gap: 2rem; flex-wrap: wrap; }
+
+    .nota-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--cinza-escuro);
+      text-transform: uppercase;
+    }
+
+    .nota-item span:first-child { font-size: 1rem; }
+
+    @media (max-width: 768px) {
+      .ementa-main { padding: 4rem 1.5rem; }
+      .prato-img { width: 60px; height: 60px; }
+      .ementa-nota { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; }
+      .prato-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .prato-preco { padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Nobre<span>Restaurante &amp; Adega</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html">Sobre</a></li>
+    <li><a href="ementa.html" class="active">Ementa</a></li>
+    <li><a href="galeria.html">Galeria</a></li>
+    <li><a href="reservas.html" class="nav-reserva">Reservar Mesa</a></li>
+  </ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg ementa-hero-bg"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Sabores Autênticos de Moçambique</p>
+    <h1>A nossa <em>Ementa</em></h1>
+  </div>
+</section>
+
+<section class="ementa-main">
+  <div class="ementa-filtros reveal">
+    <button class="filtro-btn activo" data-cat="todos">Todos</button>
+    <button class="filtro-btn" data-cat="entradas">Entradas</button>
+    <button class="filtro-btn" data-cat="sopas">Sopas</button>
+    <button class="filtro-btn" data-cat="peixe">Peixe & Marisco</button>
+    <button class="filtro-btn" data-cat="carne">Carnes</button>
+    <button class="filtro-btn" data-cat="sobremesas">Sobremesas</button>
+    <button class="filtro-btn" data-cat="bebidas">Bebidas</button>
+  </div>
+
+  <!-- ENTRADAS -->
+  <div class="ementa-secao reveal" id="cat-entradas">
+    <div class="categoria-titulo">Entradas <em>&amp; Petiscos</em></div>
+    <p class="categoria-desc">Para abrir o apetite — pequenos sabores que aquecem a alma moçambicana.</p>
+    <ul class="prato-list">
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=200&q=80" alt="Pastéis de Camarão" class="prato-img" />
+          <div>
+            <div class="prato-nome">Pastéis de Camarão</div>
+            <p class="prato-descricao">Pastéis fritos recheados com camarão moído, cebola, coentros e piri-piri</p>
+            <div class="prato-tags"><span class="prato-tag">Glúten</span><span class="prato-tag">Marisco</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">180 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=200&q=80" alt="Rissóis de Carne" class="prato-img" />
+          <div>
+            <div class="prato-nome">Rissóis de Carne</div>
+            <p class="prato-descricao">Massa crocante recheada com carne picada temperada, azeitonas e especiarias</p>
+            <div class="prato-tags"><span class="prato-tag">Glúten</span><span class="prato-tag">Carne</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">150 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1625938144755-6b30e5edddab?w=200&q=80" alt="Camarao Grelhado" class="prato-img" />
+          <div>
+            <div class="prato-nome">Camarão Grelhado com Molho de Coco</div>
+            <p class="prato-descricao">Camarões frescos grelhados, servidos com molho de coco e piri-piri</p>
+            <div class="prato-tags"><span class="prato-tag">Marisco</span><span class="prato-tag">⭐ Destaque</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">320 MTn</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SOPAS -->
+  <div class="ementa-secao reveal" id="cat-sopas">
+    <div class="categoria-titulo">Sopas <em>&amp; Caldos</em></div>
+    <p class="categoria-desc">Reconforto em cada colher — sabores que aquecem as noites de Lichinga.</p>
+    <ul class="prato-list">
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=200&q=80" alt="Sopa de Cacana" class="prato-img" />
+          <div>
+            <div class="prato-nome">Sopa de Cacana</div>
+            <p class="prato-descricao">Folhas de abóbora, amendoim, alho e cebola — uma sopa tradicional do Niassa</p>
+            <div class="prato-tags"><span class="prato-tag">Sem Glúten</span><span class="prato-tag">Vegetariano</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">120 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1548943487-a2e4e43b4853?w=200&q=80" alt="Sopa de Feijão" class="prato-img" />
+          <div>
+            <div class="prato-nome">Sopa de Feijão Nhemba</div>
+            <p class="prato-descricao">Feijão nhemba (feijão preto), abóbora, mandioca e especiarias</p>
+            <div class="prato-tags"><span class="prato-tag">Sem Glúten</span><span class="prato-tag">Vegan</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">110 MTn</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PEIXE & MARISCO -->
+  <div class="ementa-secao reveal" id="cat-peixe">
+    <div class="categoria-titulo">Peixes <em>&amp; Mariscos</em></div>
+    <p class="categoria-desc">Do Lago Niassa e do Canal de Moçambique — o melhor dos nossos mares e águas interiores.</p>
+    <ul class="prato-list">
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?w=200&q=80" alt="Peixe do Lago Niassa" class="prato-img" />
+          <div>
+            <div class="prato-nome">Peixe do Lago Niassa Grelhado</div>
+            <p class="prato-descricao">Peixe fresco capturado no Lago Niassa, grelhado com limão, alho e piri-piri</p>
+            <div class="prato-tags"><span class="prato-tag">Peixe</span><span class="prato-tag">⭐ Destaque</span><span class="prato-tag">Sazonal</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">450 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=200&q=80" alt="Arroz de Marisco" class="prato-img" />
+          <div>
+            <div class="prato-nome">Arroz de Marisco à Moda de Moçambique</div>
+            <p class="prato-descricao">Camarão, lula, amêijoa, leite de coco, coentros e piri-piri (para 2 pessoas)</p>
+            <div class="prato-tags"><span class="prato-tag">Marisco</span><span class="prato-tag">Glúten</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">850 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&q=80" alt="Camarão à Zambeziana" class="prato-img" />
+          <div>
+            <div class="prato-nome">Camarão à Zambeziana</div>
+            <p class="prato-descricao">Camarão salteado com molho de tomate, cebola, alho, malagueta e leite de coco</p>
+            <div class="prato-tags"><span class="prato-tag">Marisco</span><span class="prato-tag">⭐ Destaque</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">520 MTn</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CARNES -->
+  <div class="ementa-secao reveal" id="cat-carne">
+    <div class="categoria-titulo">Carnes <em>Moçambicanas</em></div>
+    <p class="categoria-desc">Sabores intensos que celebram as nossas tradições.</p>
+    <ul class="prato-list">
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1626074353765-517a681e40be?w=200&q=80" alt="Frango à Zambeziana" class="prato-img" />
+          <div>
+            <div class="prato-nome">Frango à Zambeziana</div>
+            <p class="prato-descricao">Frango grelhado com molho de amendoim, leite de coco e piri-piri — acompanha xima ou arroz</p>
+            <div class="prato-tags"><span class="prato-tag">Frango</span><span class="prato-tag">⭐ Destaque</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">380 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=200&q=80" alt="Prego no Pão" class="prato-img" />
+          <div>
+            <div class="prato-nome">Prego no Pão com Molho à Moda</div>
+            <p class="prato-descricao">Bife de vaca grelhado, pão caseiro, molho especial de alho e malagueta</p>
+            <div class="prato-tags"><span class="prato-tag">Carne</span><span class="prato-tag">Glúten</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">280 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=200&q=80" alt="Cabrito Assado" class="prato-img" />
+          <div>
+            <div class="prato-nome">Cabrito Assado do Niassa</div>
+            <p class="prato-descricao">Cabrito tenro assado no forno de lenha, acompanhado de batata doce assada e molho de hortelã</p>
+            <div class="prato-tags"><span class="prato-tag">Carne</span><span class="prato-tag">Especialidade</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">650 MTn</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SOBREMESAS -->
+  <div class="ementa-secao reveal" id="cat-sobremesas">
+    <div class="categoria-titulo"><em>Sobremesas</em> da Casa</div>
+    <p class="categoria-desc">Doces que fazem a memória de uma refeição perfeita.</p>
+    <ul class="prato-list">
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1484723091739-30990b39e4ff?w=200&q=80" alt="Doce de Coco" class="prato-img" />
+          <div>
+            <div class="prato-nome">Doce de Coco Moçambicano</div>
+            <p class="prato-descricao">Coco ralado fresco, leite condensado, canela e açúcar caramelizado</p>
+            <div class="prato-tags"><span class="prato-tag">Lactose</span><span class="prato-tag">⭐ Destaque</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">140 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=200&q=80" alt="Mousse de Chocolate" class="prato-img" />
+          <div>
+            <div class="prato-nome">Mousse de Chocolate com Coco</div>
+            <p class="prato-descricao">Chocolate belga, leite de coco, flor de sal e lascas de coco tostado</p>
+            <div class="prato-tags"><span class="prato-tag">Lactose</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">160 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200&q=80" alt="Pudim de Coco" class="prato-img" />
+          <div>
+            <div class="prato-nome">Pudim de Coco e Leite</div>
+            <p class="prato-descricao">Pudim cremoso com calda de açúcar queimado e coco ralado</p>
+            <div class="prato-tags"><span class="prato-tag">Lactose</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">130 MTn</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- BEBIDAS -->
+  <div class="ementa-secao reveal" id="cat-bebidas">
+    <div class="categoria-titulo">Bebidas <em>&amp; Vinhos</em></div>
+    <p class="categoria-desc">Uma seleção especial de vinhos sul-africanos, portugueses e bebidas locais.</p>
+    <ul class="prato-list">
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200&q=80" alt="Vinho Tinto" class="prato-img" />
+          <div>
+            <div class="prato-nome">Vinho Tinto — Nederburg (África do Sul)</div>
+            <p class="prato-descricao">Tinto encorpado com notas de frutos escuros, baunilha e especiarias</p>
+            <div class="prato-tags"><span class="prato-tag">Tinto</span><span class="prato-tag">Sul-Africano</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">850 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1474722883778-792e7990302f?w=200&q=80" alt="Vinho Branco" class="prato-img" />
+          <div>
+            <div class="prato-nome">Vinho Branco — Durbanville Hills</div>
+            <p class="prato-descricao">Branco fresco com notas cítricas e minerais, ideal para peixes e mariscos</p>
+            <div class="prato-tags"><span class="prato-tag">Branco</span><span class="prato-tag">Sul-Africano</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">750 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=200&q=80" alt="Sumo de Caju" class="prato-img" />
+          <div>
+            <div class="prato-nome">Sumo Natural de Caju</div>
+            <p class="prato-descricao">Sumo fresco de caju da nossa região, sem conservantes</p>
+            <div class="prato-tags"><span class="prato-tag">Bebida</span><span class="prato-tag">Sem Álcool</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">90 MTn</span>
+      </li>
+      <li class="prato-item">
+        <div class="prato-info">
+          <img src="https://images.unsplash.com/photo-1551024703-8e3e92aee51d?w=200&q=80" alt="Cerveja 2M" class="prato-img" />
+          <div>
+            <div class="prato-nome">Cerveja 2M (Laurentina)</div>
+            <p class="prato-descricao">Cerveja moçambicana — a clássica 2M, servida bem gelada</p>
+            <div class="prato-tags"><span class="prato-tag">Cerveja</span><span class="prato-tag">Moçambicana</span></div>
+          </div>
+        </div>
+        <span class="prato-preco">110 MTn</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="ementa-nota">
+  <div class="nota-icones">
+    <div class="nota-item"><span>Destaque da Casa</span></div>
+    <div class="nota-item"><span>Contém Glúten</span></div>
+    <div class="nota-item"><span>Contém Lactose</span></div>
+    <div class="nota-item"><span>Contém Peixe</span></div>
+    <div class="nota-item"><span>Contém Marisco</span></div>
+    <div class="nota-item"><span>Vegetariano/Vegan</span></div>
+  </div>
+  <div class="nota-icones">
+    <div class="nota-item"><span>Frango</span></div>
+    <div class="nota-item"><span>Carne</span></div>
+    <div class="nota-item"><span>Especialidade</span></div>
+    <div class="nota-item"><span>Tinto</span></div>
+    <div class="nota-item"><span>Branco</span></div>
+    <div class="nota-item"><span>Cerveja</span></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="logo">Nobre</span><p>Cozinha moçambicana contemporânea, no coração de Lichinga. Os melhores sabores do Niassa à sua mesa.</p></div>
+    <div class="footer-col"><h4>Navegação</h4><ul><li><a href="index.html">Início</a></li><li><a href="sobre.html">Sobre Nós</a></li><li><a href="ementa.html">Ementa</a></li><li><a href="galeria.html">Galeria</a></li><li><a href="reservas.html">Reservas</a></li></ul></div>
+    <div class="footer-col"><h4>Horários</h4><p>Terça – Domingo<br>12h00 – 15h30<br>19h00 – 23h00<br><br>Segunda-Feira<br>Encerrado</p></div>
+    <div class="footer-col"><h4>Contactos</h4><p>Avenida da Independência, 124<br>Lichinga, Niassa<br>Moçambique<br><br>(+258) 82 123 4567</p></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Restaurante Nobre. Todos os direitos reservados.</p>
+    <p>Orgulhosamente em Lichinga</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  const botoes = document.querySelectorAll('.filtro-btn');
+  const seccoes = document.querySelectorAll('.ementa-secao');
+
+  botoes.forEach(btn => {
+    btn.addEventListener('click', () => {
+      botoes.forEach(b => b.classList.remove('activo'));
+      btn.classList.add('activo');
+
+      const cat = btn.dataset.cat;
+      seccoes.forEach(s => {
+        if (cat === 'todos' || s.id === 'cat-' + cat) {
+          s.classList.remove('oculto');
+        } else {
+          s.classList.add('oculto');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,7 +27,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.15) 100%);
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.15) 100%);
     }
 
     .hero-content {
@@ -56,7 +57,7 @@
       margin-bottom: 2rem;
       opacity: 0;
       animation: fadeUp 1s 0.5s forwards;
-      text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
     }
 
     .hero h1 em {
@@ -103,7 +104,7 @@
       font-family: var(--font-ui);
       font-size: 0.58rem;
       letter-spacing: 0.3em;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       text-transform: uppercase;
     }
 
@@ -115,16 +116,39 @@
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(25px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
+
     @keyframes scrollDrop {
-      0%, 100% { transform: scaleY(1); opacity: 0.5; }
-      50% { transform: scaleY(1.3); opacity: 1; }
+
+      0%,
+      100% {
+        transform: scaleY(1);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: scaleY(1.3);
+        opacity: 1;
+      }
     }
 
     .sobre-home {
@@ -145,7 +169,10 @@
       object-fit: cover;
       transition: transform 8s ease;
     }
-    .sobre-img:hover img { transform: scale(1.05); }
+
+    .sobre-img:hover img {
+      transform: scale(1.05);
+    }
 
     .sobre-img-badge {
       position: absolute;
@@ -171,6 +198,7 @@
       font-weight: 700;
       line-height: 1;
     }
+
     .sobre-img-badge .label {
       font-family: var(--font-ui);
       font-size: 0.58rem;
@@ -198,7 +226,9 @@
       border-left: 2px solid var(--ouro);
     }
 
-    .especialidades { background: var(--off-white); }
+    .especialidades {
+      background: var(--off-white);
+    }
 
     .esp-grid {
       display: grid;
@@ -221,12 +251,14 @@
       transition: transform 0.6s ease;
     }
 
-    .esp-card:hover img { transform: scale(1.08); }
+    .esp-card:hover img {
+      transform: scale(1.08);
+    }
 
     .esp-card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 50%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -235,7 +267,7 @@
     }
 
     .esp-card:hover .esp-card-overlay {
-      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 60%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.2) 60%);
     }
 
     .esp-num {
@@ -256,14 +288,16 @@
 
     .esp-card-overlay p {
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.75);
+      color: rgba(255, 255, 255, 0.75);
       margin-top: 0.5rem;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s;
     }
 
-    .esp-card:hover .esp-card-overlay p { max-height: 60px; }
+    .esp-card:hover .esp-card-overlay p {
+      max-height: 60px;
+    }
 
     .numeros {
       background: var(--ouro);
@@ -290,12 +324,12 @@
       font-size: 0.65rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255, 255, 255, 0.85);
       margin-top: 0.5rem;
     }
 
-    .testemunhos { 
-      background: var(--creme); 
+    .testemunhos {
+      background: var(--creme);
     }
 
     .test-grid {
@@ -310,19 +344,20 @@
       border: 1px solid var(--bege);
       padding: 2.5rem;
       position: relative;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .test-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
 
     .test-card::before {
       content: '"';
       position: absolute;
-      top: 1rem; right: 2rem;
+      top: 1rem;
+      right: 2rem;
       font-family: var(--font-display);
       font-size: 5rem;
       color: var(--ouro-suave);
@@ -354,209 +389,253 @@
     }
 
     @media (max-width: 1024px) {
-      .esp-grid { grid-template-columns: 1fr 1fr; }
-      .numeros-grid { grid-template-columns: repeat(2, 1fr); }
-      .test-grid { grid-template-columns: 1fr; }
+      .esp-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .numeros-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .test-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 768px) {
-      .sobre-home { grid-template-columns: 1fr; }
-      .sobre-texto { padding: 4rem 1.5rem; }
-      .sobre-img-badge { right: 1rem; width: 130px; height: 130px; }
-      .sobre-img-badge .anos { font-size: 2rem; }
-      .esp-grid { grid-template-columns: 1fr; }
-      .hero-content { padding: 0 1.5rem; }
-      .numeros-grid { grid-template-columns: repeat(2, 1fr); }
-      .numeros { padding: 4rem 1.5rem; }
+      .sobre-home {
+        grid-template-columns: 1fr;
+      }
+
+      .sobre-texto {
+        padding: 4rem 1.5rem;
+      }
+
+      .sobre-img-badge {
+        right: 1rem;
+        width: 130px;
+        height: 130px;
+      }
+
+      .sobre-img-badge .anos {
+        font-size: 2rem;
+      }
+
+      .esp-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        padding: 0 1.5rem;
+      }
+
+      .numeros-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .numeros {
+        padding: 4rem 1.5rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">
-    Nobre
-    <span>Restaurante &amp; Adega</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Início</a></li>
-    <li><a href="sobre.html">Sobre</a></li>
-    <li><a href="ementa.html">Ementa</a></li>
-    <li><a href="galeria.html">Galeria</a></li>
-    <li><a href="reservas.html" class="nav-reserva">Reservar Mesa</a></li>
-  </ul>
-  <button class="nav-toggle" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      Nobre
+      <span>Restaurante &amp; Adega</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Início</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="ementa.html">Ementa</a></li>
+      <li><a href="galeria.html">Galeria</a></li>
+      <li><a href="reservas.html" class="nav-reserva">Reservar Mesa</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">Lichinga, desde 2015</p>
-    <h1>Sabores de<em>Moçambique</em></h1>
-    <p class="hero-desc">Cozinha moçambicana contemporânea, inspirada nas tradições locais, no Lago Niassa e nos melhores produtos da nossa terra.</p>
-    <div class="hero-actions">
-      <a href="reservas.html" class="btn btn-ouro">Reservar Mesa</a>
-      <a href="ementa.html" class="btn btn-outline">Ver Ementa</a>
-    </div>
-  </div>
-  <div class="hero-scroll">
-    <span>Descobrir</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- SOBRE HOME -->
-<section class="sobre-home">
-  <div class="sobre-img reveal">
-    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80" alt="Interior do Restaurante Nobre em Lichinga" />
-    <div class="sobre-img-badge">
-      <span class="anos">10+</span>
-      <span class="label">Anos de<br>Sabores</span>
-    </div>
-  </div>
-  <div class="sobre-texto">
-    <span class="secao-eyebrow reveal">A Nossa História</span>
-    <h2 class="reveal">Uma <em>paixão</em><br>pela cozinha moçambicana</h2>
-    <blockquote class="sobre-quote reveal">
-      "A verdadeira cozinha moçambicana é feita com alma, piri-piri e o calor da nossa gente."
-    </blockquote>
-    <p class="reveal" style="color:var(--cinza-escuro); margin-bottom:2rem;">
-      O Restaurante Nobre nasceu em Lichinga com um propósito claro: celebrar os sabores autênticos de Moçambique, desde os pratos tradicionais da região do Niassa às influências da costa. Cada prato conta uma história da nossa terra.
-    </p>
-    <a href="sobre.html" class="btn btn-outline reveal">Conhecer-nos</a>
-  </div>
-</section>
-
-<!-- ESPECIALIDADES - IMAGENS CORRIGIDAS -->
-<section class="especialidades secao">
-  <div class="secao-topo">
-    <span class="secao-eyebrow reveal">Destaques da Casa</span>
-    <h2 class="reveal">As nossas <em>especialidades</em></h2>
-  </div>
-  <div class="esp-grid">
-    <!-- PRATO 1: FRANGO À ZAMBEZIANA -->
-    <div class="esp-card reveal">
-      <img src="./assets/images/frangozbz.png" alt="Frango à Zambeziana - Frango grelhado com molho de coco e amendoim" />
-      <div class="esp-card-overlay">
-        <span class="esp-num">01</span>
-        <h3>Frango à Zambeziana</h3>
-        <p>Frango grelhado com molho de coco, amendoim e piri-piri</p>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Lichinga, desde 2015</p>
+      <h1>Sabores de<em>Moçambique</em></h1>
+      <p class="hero-desc">Cozinha moçambicana contemporânea, inspirada nas tradições locais, no Lago Niassa e nos
+        melhores produtos da nossa terra.</p>
+      <div class="hero-actions">
+        <a href="reservas.html" class="btn btn-ouro">Reservar Mesa</a>
+        <a href="ementa.html" class="btn btn-outline">Ver Ementa</a>
       </div>
     </div>
-    <!-- PRATO 2: PEIXE DO LAGO NIASSA -->
-    <div class="esp-card reveal reveal-delay-1">
-      <img src="./assets/images/chambo.png" alt="Peixe grelhado do Lago Niassa com limão e especiarias" />
-      <div class="esp-card-overlay">
-        <span class="esp-num">02</span>
-        <h3>Peixe do Lago Niassa</h3>
-        <p>Peixe fresco grelhado com molho de limão, alho e piri-piri</p>
+    <div class="hero-scroll">
+      <span>Descobrir</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- SOBRE HOME -->
+  <section class="sobre-home">
+    <div class="sobre-img reveal">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80"
+        alt="Interior do Restaurante Nobre em Lichinga" />
+      <div class="sobre-img-badge">
+        <span class="anos">10+</span>
+        <span class="label">Anos de<br>Sabores</span>
       </div>
     </div>
-    <!-- PRATO 3: MATAPA -->
-    <div class="esp-card reveal reveal-delay-2">
-      <img src="./assets/images/matapa.png" alt="Matapa - Folhas de mandioca com amendoim e camarão" />
-      <div class="esp-card-overlay">
-        <span class="esp-num">03</span>
-        <h3>Matapa Tradicional</h3>
-        <p>Folhas de mandioca, amendoim, leite de coco e camarão seco</p>
-      </div>
-    </div>
-  </div>
-  <div style="text-align:center; margin-top:3rem;">
-    <a href="ementa.html" class="btn btn-outline reveal">Ver Ementa Completa</a>
-  </div>
-</section>
-
-<!-- NÚMEROS -->
-<section class="numeros">
-  <div class="numeros-grid">
-    <div class="numero-item reveal">
-      <h3>10+</h3>
-      <p>Anos de Experiência</p>
-    </div>
-    <div class="numero-item reveal reveal-delay-1">
-      <h3>35</h3>
-      <p>Pratos na Ementa</p>
-    </div>
-    <div class="numero-item reveal reveal-delay-2">
-      <h3>80+</h3>
-      <p>Rótulos na Adega</p>
-    </div>
-    <div class="numero-item reveal reveal-delay-3">
-      <h3>5K+</h3>
-      <p>Clientes por Ano</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTEMUNHOS -->
-<section class="testemunhos secao">
-  <div class="secao-topo">
-    <span class="secao-eyebrow reveal">O Que Dizem de Nós</span>
-    <h2 class="reveal">Palavras dos <em>nossos clientes</em></h2>
-  </div>
-  <div class="test-grid">
-    <div class="test-card reveal">
-      <div class="test-estrelas">★★★★★</div>
-      <p>O melhor restaurante de Lichinga! O frango à zambeziana é divinal e o atendimento é extremamente caloroso. Recomendo a todos!</p>
-      <span class="test-autor">— Ana Muchanga, Lichinga</span>
-    </div>
-    <div class="test-card reveal reveal-delay-1">
-      <div class="test-estrelas">★★★★★</div>
-      <p>Vim de Maputo a negócios e fiquei impressionado com a qualidade da comida. O peixe do Lago Niassa é fresco e delicioso.</p>
-      <span class="test-autor">— Carlos Tembe, Maputo</span>
-    </div>
-    <div class="test-card reveal reveal-delay-2">
-      <div class="test-estrelas">★★★★★</div>
-      <p>Trouxe a minha família para celebrar o aniversário. Todos adoraram a Matapa e o ambiente acolhedor. Voltaremos com certeza!</p>
-      <span class="test-autor">— Sofia Bandeira, Nampula</span>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <span class="logo">Nobre</span>
-      <p>Cozinha moçambicana contemporânea, no coração de Lichinga. Uma experiência que celebra os sabores e a cultura da nossa terra.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Navegação</h4>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobre.html">Sobre Nós</a></li>
-        <li><a href="ementa.html">Ementa</a></li>
-        <li><a href="galeria.html">Galeria</a></li>
-        <li><a href="reservas.html">Reservas</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Horários</h4>
-      <p>
-        Terça – Domingo<br>12h00 – 15h30<br>19h00 – 23h00<br><br>
-        Segunda-Feira<br>Encerrado
+    <div class="sobre-texto">
+      <span class="secao-eyebrow reveal">A Nossa História</span>
+      <h2 class="reveal">Uma <em>paixão</em><br>pela cozinha moçambicana</h2>
+      <blockquote class="sobre-quote reveal">
+        "A verdadeira cozinha moçambicana é feita com alma, piri-piri e o calor da nossa gente."
+      </blockquote>
+      <p class="reveal" style="color:var(--cinza-escuro); margin-bottom:2rem;">
+        O Restaurante Nobre nasceu em Lichinga com um propósito claro: celebrar os sabores autênticos de Moçambique,
+        desde os pratos tradicionais da região do Niassa às influências da costa. Cada prato conta uma história da nossa
+        terra.
       </p>
+      <a href="sobre.html" class="btn btn-outline reveal">Conhecer-nos</a>
     </div>
-    <div class="footer-col">
-      <h4>Contactos</h4>
-      <p>
-        Avenida da Independência, 124<br>
-        Lichinga, Niassa<br>
-        Moçambique<br><br>
-        (+258) 82 123 4567<br>
-        reservas@restaurantenobre.mz
-      </p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2024 Restaurante Nobre. Todos os direitos reservados.</p>
-    <p>Orgulhosamente em Lichinga</p>
-  </div>
-</footer>
+  </section>
 
-<script src="js/main.js"></script>
+  <!-- ESPECIALIDADES - IMAGENS CORRIGIDAS -->
+  <section class="especialidades secao">
+    <div class="secao-topo">
+      <span class="secao-eyebrow reveal">Destaques da Casa</span>
+      <h2 class="reveal">As nossas <em>especialidades</em></h2>
+    </div>
+    <div class="esp-grid">
+      <!-- PRATO 1: FRANGO À ZAMBEZIANA -->
+      <div class="esp-card reveal">
+        <img src="./assets/images/frangozbz.png"
+          alt="Frango à Zambeziana - Frango grelhado com molho de coco e amendoim" />
+        <div class="esp-card-overlay">
+          <span class="esp-num">01</span>
+          <h3>Frango à Zambeziana</h3>
+          <p>Frango grelhado com molho de coco, amendoim e piri-piri</p>
+        </div>
+      </div>
+      <!-- PRATO 2: PEIXE DO LAGO NIASSA -->
+      <div class="esp-card reveal reveal-delay-1">
+        <img src="./assets/images/chambo.png" alt="Peixe grelhado do Lago Niassa com limão e especiarias" />
+        <div class="esp-card-overlay">
+          <span class="esp-num">02</span>
+          <h3>Peixe do Lago Niassa</h3>
+          <p>Peixe fresco grelhado com molho de limão, alho e piri-piri</p>
+        </div>
+      </div>
+      <!-- PRATO 3: MATAPA -->
+      <div class="esp-card reveal reveal-delay-2">
+        <img src="./assets/images/matapa.png" alt="Matapa - Folhas de mandioca com amendoim e camarão" />
+        <div class="esp-card-overlay">
+          <span class="esp-num">03</span>
+          <h3>Matapa Tradicional</h3>
+          <p>Folhas de mandioca, amendoim, leite de coco e camarão seco</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:3rem;">
+      <a href="ementa.html" class="btn btn-outline reveal">Ver Ementa Completa</a>
+    </div>
+  </section>
+
+  <!-- NÚMEROS -->
+  <section class="numeros">
+    <div class="numeros-grid">
+      <div class="numero-item reveal">
+        <h3>10+</h3>
+        <p>Anos de Experiência</p>
+      </div>
+      <div class="numero-item reveal reveal-delay-1">
+        <h3>35</h3>
+        <p>Pratos na Ementa</p>
+      </div>
+      <div class="numero-item reveal reveal-delay-2">
+        <h3>80+</h3>
+        <p>Rótulos na Adega</p>
+      </div>
+      <div class="numero-item reveal reveal-delay-3">
+        <h3>5K+</h3>
+        <p>Clientes por Ano</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTEMUNHOS -->
+  <section class="testemunhos secao">
+    <div class="secao-topo">
+      <span class="secao-eyebrow reveal">O Que Dizem de Nós</span>
+      <h2 class="reveal">Palavras dos <em>nossos clientes</em></h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-estrelas">★★★★★</div>
+        <p>O melhor restaurante de Lichinga! O frango à zambeziana é divinal e o atendimento é extremamente caloroso.
+          Recomendo a todos!</p>
+        <span class="test-autor">— Ana Muchanga, Lichinga</span>
+      </div>
+      <div class="test-card reveal reveal-delay-1">
+        <div class="test-estrelas">★★★★★</div>
+        <p>Vim de Maputo a negócios e fiquei impressionado com a qualidade da comida. O peixe do Lago Niassa é fresco e
+          delicioso.</p>
+        <span class="test-autor">— Carlos Tembe, Maputo</span>
+      </div>
+      <div class="test-card reveal reveal-delay-2">
+        <div class="test-estrelas">★★★★★</div>
+        <p>Trouxe a minha família para celebrar o aniversário. Todos adoraram a Matapa e o ambiente acolhedor.
+          Voltaremos com certeza!</p>
+        <span class="test-autor">— Sofia Bandeira, Nampula</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">Nobre</span>
+        <p>Cozinha moçambicana contemporânea, no coração de Lichinga. Uma experiência que celebra os sabores e a cultura
+          da nossa terra.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre Nós</a></li>
+          <li><a href="ementa.html">Ementa</a></li>
+          <li><a href="galeria.html">Galeria</a></li>
+          <li><a href="reservas.html">Reservas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Horários</h4>
+        <p>
+          Terça – Domingo<br>12h00 – 15h30<br>19h00 – 23h00<br><br>
+          Segunda-Feira<br>Encerrado
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Contactos</h4>
+        <p>
+          Avenida da Independência, 124<br>
+          Lichinga, Niassa<br>
+          Moçambique<br><br>
+          (+258) 862166271<br>
+          reservas@restaurantenobre.mz
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Restaurante Nobre. Todos os direitos reservados.</p>
+      <p>Orgulhosamente em Lichinga</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
+
 </html>
